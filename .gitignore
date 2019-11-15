@@ -48,3 +48,5 @@ hs_err_pid*
 /FirstProject/.idea/workspace.xml
 /FirstProject/.settings/org.eclipse.jdt.core.prefs
 /FirstProject/.settings/org.eclipse.m2e.core.prefs
+/FirstProject/target/classes/hibernate.cfg.xml
+/FirstProject/target/classes/log4j.properties
