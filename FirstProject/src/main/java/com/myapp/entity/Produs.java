@@ -12,10 +12,10 @@ public class Produs {
     private String name;
 
     @Column
-    private String marime;
+    private String price;
 
     @Column
-    private String material;
+    private String description;
 
     public int getId() {
         return id;
@@ -26,17 +26,17 @@ public class Produs {
     public void setName(String name) {
         this.name = name;
     }
-    public String getMarime() {
-        return marime;
+    public String getPrice() {
+        return price;
     }
-    public void setMarime(String marime) {
-        this.marime = marime;
+    public void setPrice(String price) {
+        this.price = price;
     }
-    public String getMaterial() {
-        return material;
+    public String getDescription() {
+        return description;
     }
-    public void setMaterial(String material) {
-        this.material = material;
+    public void setMaterial(String description) {
+        this.description = description;
     }
 
 

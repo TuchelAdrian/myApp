@@ -3,17 +3,17 @@ package com.myapp.dao;
 import java.io.Serializable;
 import java.util.List;
 
-public interface ProdusDao<T, Id extends Serializable> {
+public interface ProdusDao<Produs, Id extends Serializable> {
 
-    void save(T entity);
+    void save(Produs entity);
 
-    void update(T entity);
+    void update(Produs entity);
 
-    T findById(Id id);
+    Produs findById(Id id);
 
-    void delete(T entity);
+    void delete(Produs entity);
 
-    List<T> findAll();
+    List<Produs> findAll();
 
     void deleteAll();
 }
