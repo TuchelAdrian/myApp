@@ -76,10 +76,14 @@ public class App {
         user.setPassword("carmen123");
         user.setPhone("0714523689");
 
-        cartService.save(cart);
+        //cartService.save(cart);
         categoryService.save(category);
         orderService.save(order);
         roleService.save(role);
+
+        user.setCart(cart);
+        //cart.setUser(user);
         userService.save(user);
+        LOG.info("AFISARE:" + cartService.findById(user.getCart().getId()).getUser().getName());
     }
 }

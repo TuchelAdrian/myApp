@@ -5,7 +5,6 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column
     private int id;
 
@@ -23,6 +22,17 @@ public class User {
 
     @Column
     private String password;
+
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private Cart cart;
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     public int getId() {
         return id;

@@ -4,10 +4,8 @@ import javax.persistence.*;
 
 @Entity
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column
     private int id;
 
@@ -16,6 +14,17 @@ public class Cart {
 
     @Column
     private String totalAmount;
+
+    @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;

@@ -7,7 +7,6 @@ public class Produs {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
-
     @Column
     private String name;
 
