@@ -18,6 +18,17 @@ public class Cart {
     @OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
     private User user;
 
+    @OneToOne(mappedBy = "cart")
+    private OrderO order;
+
+    public OrderO getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderO order) {
+        this.order = order;
+    }
+
     public User getUser() {
         return user;
     }

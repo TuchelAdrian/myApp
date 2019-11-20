@@ -1,6 +1,7 @@
 package com.myapp.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Category {
@@ -11,6 +12,17 @@ public class Category {
 
     @Column
     private String name;
+
+    @ManyToMany(mappedBy="categories")
+    private Set<Produs> produse;
+
+    public Set<Produs> getProduse() {
+        return produse;
+    }
+
+    public void setProduse(Set<Produs> produse) {
+        this.produse = produse;
+    }
 
     public int getId() {
         return id;
@@ -23,4 +35,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
 }

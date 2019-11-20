@@ -20,27 +20,27 @@ public class App {
         Produs produs=new Produs();
         Produs produs2=new Produs();
         Produs produs3=new Produs();
-        ProdusServiceImpl service=new ProdusServiceImpl();
+        ProdusServiceImpl serviceProdus=new ProdusServiceImpl();
 
         produs.setName("Mars");
         produs.setPrice("30");
         produs.setMaterial("plastic");
-        service.save(produs);
+        serviceProdus.save(produs);
 
         produs2.setName("Moon");
         produs2.setPrice("2");
         produs2.setMaterial("bronze");
-        service.save(produs2);
+        serviceProdus.save(produs2);
 
         produs3.setName("Earth");
         produs3.setPrice("4");
         produs3.setMaterial("silver");
-        service.save(produs3);
+        serviceProdus.save(produs3);
 
-        LOG.info(service.findById(3).getName());
+        LOG.info(serviceProdus.findById(3).getName());
         produs2.setPrice("5");
-        service.update(produs2);
-        List<Produs> produse=service.findAll();
+        serviceProdus.update(produs2);
+        List<Produs> produse=serviceProdus.findAll();
 
         //service.deleteAll();
         //LOG.info(produse.size());
@@ -85,5 +85,9 @@ public class App {
         //cart.setUser(user);
         userService.save(user);
         LOG.info("AFISARE:" + cartService.findById(user.getCart().getId()).getUser().getName());
+
+        produs2.addCategory(category);
+        serviceProdus.update(produs2);
+
     }
 }

@@ -1,5 +1,8 @@
 package com.myapp.entity;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Produs {
@@ -15,6 +18,32 @@ public class Produs {
 
     @Column
     private String description;
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    private Set<Category> categories= new HashSet<>();
+
+    @ManyToMany
+    private Set<OrderO> orders;
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+
+    public Set<OrderO> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderO> orders) {
+        this.orders = orders;
+    }
 
     public int getId() {
         return id;
@@ -38,6 +67,7 @@ public class Produs {
         this.description = description;
     }
 
-
-
+    public void addCategory(Category c) {
+        this.categories.add(c);
+    }
 }

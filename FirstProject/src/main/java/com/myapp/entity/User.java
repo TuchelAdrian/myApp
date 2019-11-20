@@ -1,5 +1,7 @@
 package com.myapp.entity;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -25,6 +27,20 @@ public class User {
 
     @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private Cart cart;
+
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+    private Set<OrderO> orders;
+
+    @ManyToMany(mappedBy="users")
+    private Set<Role> roles;
+
+    public Set<OrderO> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderO> orders) {
+        this.orders = orders;
+    }
 
     public Cart getCart() {
         return cart;
@@ -77,4 +93,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 }
