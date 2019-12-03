@@ -1,6 +1,7 @@
 package com.myapp.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -11,6 +12,7 @@ public class Category {
     private int id;
 
     @Column
+    @NotNull(message="Category can't be null")
     private String name;
 
     @ManyToMany(mappedBy="categories")

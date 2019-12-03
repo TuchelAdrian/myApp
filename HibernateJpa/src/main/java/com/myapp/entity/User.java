@@ -1,6 +1,10 @@
 package com.myapp.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -11,18 +15,25 @@ public class User {
     private int id;
 
     @Column
+    @NotBlank(message = "UserName can't be null")
     private String name;
 
     @Column
+    @NotBlank(message = "Email can't be null")
+    @Email(message= "This email address is not valid")
     private String email;
 
     @Column
+    @Size(min=10, max=10, message = "Phone number must have 10 digits")
     private String phone;
 
     @Column
+    @NotBlank(message = "The address can't be blank")
     private String address;
 
     @Column
+    @NotNull(message = "The password can't be null")
+    @Size(min=5, message="The password should have at least 5 characters")
     private String password;
 
     @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)

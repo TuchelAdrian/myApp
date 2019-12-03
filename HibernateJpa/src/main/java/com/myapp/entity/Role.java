@@ -1,6 +1,7 @@
 package com.myapp.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -11,6 +12,7 @@ public class Role {
     private int id;
 
     @Column
+    @NotBlank(message = "Role can't be null")
     private String name;
 
     @ManyToMany

@@ -1,6 +1,8 @@
 package com.myapp.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,14 +14,18 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
+
     @Column
+    @NotNull(message="Order's cantity can't be null")
     private int cantitate;
 
     @Column
     @Temporal(TemporalType.DATE)
+    @NotNull(message="Date can't be null")
     private Date dateCreated;
 
     @Column
+    @NotBlank(message = "Confirmation number can't be null")
     private String confirmationNumber;
 
     @OneToOne
