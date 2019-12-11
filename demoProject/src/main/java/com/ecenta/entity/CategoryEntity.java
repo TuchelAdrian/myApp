@@ -18,6 +18,10 @@ public class CategoryEntity {
     @ManyToMany(mappedBy="categories")
     private Set<ProdusEntity> produse;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Set<ProdusEntity> getProduse() {
         return produse;
     }

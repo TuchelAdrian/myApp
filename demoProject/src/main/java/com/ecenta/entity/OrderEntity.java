@@ -37,6 +37,10 @@ public class OrderEntity {
     @ManyToMany(mappedBy = "orders")
     private Set<ProdusEntity> produse;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public CartEntity getCart() {
         return cart;
     }

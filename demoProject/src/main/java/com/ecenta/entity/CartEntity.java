@@ -21,6 +21,10 @@ public class CartEntity {
     @OneToOne(mappedBy = "cart")
     private OrderEntity order;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public OrderEntity getOrder() {
         return order;
     }

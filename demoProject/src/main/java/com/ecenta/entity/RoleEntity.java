@@ -1,7 +1,10 @@
 package com.ecenta.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,10 +19,15 @@ public class RoleEntity {
     private String name;
 
     @ManyToMany
-    private Set<UserEntity> users;
+    @JsonIgnore
+    private Set<UserEntity> users=new HashSet<>();
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
