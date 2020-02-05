@@ -2,6 +2,8 @@ package com.ecenta.controller;
 import com.ecenta.data.AuthToken;
 import com.ecenta.data.LoginData;
 import com.ecenta.util.TokenProvider;
+import com.ecenta.util.TokenResponse;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +26,7 @@ public class TokenGeneratorController {
     private TokenProvider jwtTokenUtil;
 
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody LoginData loginUser) throws AuthenticationException {
+    public String register(@RequestBody LoginData loginUser) throws AuthenticationException {
 
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -34,7 +36,11 @@ public class TokenGeneratorController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
-        return ResponseEntity.ok(new AuthToken(token));
+        TokenResponse tokenResponse=new TokenResponse();
+        tokenResponse.setStatus(200);
+        tokenResponse.setToken(token);
+        Gson gson=new Gson();
+        return gson.toJson(tokenResponse);
     }
 
 }
