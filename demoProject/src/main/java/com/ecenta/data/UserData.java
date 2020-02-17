@@ -8,13 +8,17 @@ public class UserData {
     @Expose
     private String name;
     @Expose
+    private String password;
+    @Expose
     private String phone;
     @Expose
     private String email;
     @Expose
     private String address;
 
-    public UserData(int id, String name, String phone, String email, String address) {
+    public UserData(){};
+
+    public UserData(int id, String name, String password, String phone, String email, String address) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -60,5 +64,13 @@ public class UserData {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

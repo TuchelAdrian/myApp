@@ -68,6 +68,14 @@ public class UserEntity implements UserDetails{
         this.password = user.getPassword();
     }
 
+    public UserEntity(String name, String password, String email, String phone, String address) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

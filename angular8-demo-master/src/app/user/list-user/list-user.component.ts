@@ -15,14 +15,13 @@ export class ListUserComponent implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    if(!window.localStorage.getItem('token')) {
+    if (!window.localStorage.getItem('token')) {
       this.router.navigate(['login']);
       return;
     }
     this.users = Array();
     this.apiService.getUsers()
       .subscribe( response => {
-        debugger;
         this.users = response.data;
       });
   }
@@ -31,16 +30,16 @@ export class ListUserComponent implements OnInit {
     this.apiService.deleteUser(user.id)
       .subscribe( data => {
         this.users = this.users.filter(u => u !== user);
-      })
-  };
+      });
+  }
 
   editUser(user: User): void {
-    window.localStorage.removeItem("editUserId");
-    window.localStorage.setItem("editUserId", user.id.toString());
+    window.localStorage.removeItem('editUserId');
+    window.localStorage.setItem('editUserId', user.id.toString());
     this.router.navigate(['edit-user']);
-  };
+  }
 
   addUser(): void {
     this.router.navigate(['add-user']);
-  };
+  }
 }

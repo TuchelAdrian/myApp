@@ -2,33 +2,28 @@
   <h2 class="text-center">Add User</h2>
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="username">User Name:</label>
-      <input type="text" formControlName="username" placeholder="username" name="username" class="form-control" id="username">
+      <label for="name">User Name:</label>
+      <input type="text" formControlName="name" placeholder="Name" name="name" class="form-control" id="name">
     </div>
 
     <div class="form-group">
       <label for="password">Password:</label>
-      <input type="password" formControlName="password" placeholder="password" name="password" class="form-control" id="password">
+      <input type="password" formControlName="password" placeholder="Password" name="password" class="form-control" id="password">
     </div>
 
     <div class="form-group">
-      <label for="firstName">First Name:</label>
-      <input formControlName="firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">
+      <label for="email">Email:</label>
+      <input type="text" formControlName="email" placeholder="Email" name="email" class="form-control" id="email">
     </div>
 
     <div class="form-group">
-      <label for="lastName">Last Name:</label>
-      <input formControlName="lastName" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+      <label for="phone">Phone:</label>
+      <input type="text" formControlName="phone" placeholder="Phone" name="phone" class="form-control" id="phone">
     </div>
 
     <div class="form-group">
-      <label for="age">Age:</label>
-      <input type="number" formControlName="age" placeholder="age" name="age" class="form-control" id="age">
-    </div>
-
-    <div class="form-group">
-      <label for="salary">Salary:</label>
-      <input type="number" formControlName="salary" placeholder="salary" name="salary" class="form-control" id="salary">
+      <label for="address">Address:</label>
+      <input type="text" formControlName="address" placeholder="Address" name="address" class="form-control" id="address">
     </div>
 
     <button class="btn btn-success">Add</button>

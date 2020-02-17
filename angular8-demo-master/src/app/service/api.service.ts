@@ -1,37 +1,40 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {User} from "../model/user.model";
-import {Observable} from "rxjs/index";
-import {ApiResponse} from "../model/api.response";
-import {ApiUserResponse} from "../model/api.user.response";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../model/user.model';
+import {Observable} from 'rxjs/index';
+import {ApiResponse} from '../model/api.response';
+import {ApiUserResponse} from '../model/api.user.response';
+import {SimpleResponse} from '../response/simple.response';
 
 @Injectable()
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
-  baseUrl: string = 'http://localhost:8080/user/';
+  constructor(private http: HttpClient) {
+  }
 
-  login(loginPayload) : Observable<ApiResponse> {
+  baseUrl = 'http://localhost:8080/user/';
+
+  login(loginPayload): Observable<ApiResponse> {
     return this.http.post<ApiResponse>('http://localhost:8080/' + 'token/generate-token', loginPayload);
   }
 
-  getUsers() : Observable<ApiUserResponse> {
+  getUsers(): Observable<ApiUserResponse> {
     return this.http.get<ApiUserResponse>(this.baseUrl + 'all');
   }
 
-  getUserById(id: number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.baseUrl + id);
+  getUserById(id: number): Observable<ApiUserResponse> {
+    return this.http.get<ApiUserResponse>(this.baseUrl + id);
   }
 
-  createUser(user: User): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.baseUrl, user);
+  createUser(user: User): Observable<SimpleResponse> {
+    return this.http.post<SimpleResponse>(this.baseUrl + 'add', user);
   }
 
-  updateUser(user: User): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(this.baseUrl + user.id, user);
+  updateUser(user: User): Observable<SimpleResponse> {
+    return this.http.put<SimpleResponse>(this.baseUrl + 'update/' + user.id, user);
   }
 
-  deleteUser(id: number): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(this.baseUrl + id);
+  deleteUser(id: number): Observable<SimpleResponse> {
+    return this.http.delete<SimpleResponse>(this.baseUrl + 'delete/' + id);
   }
 }
