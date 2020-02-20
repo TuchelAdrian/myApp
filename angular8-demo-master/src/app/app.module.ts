@@ -11,6 +11,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {ApiService} from "./service/api.service";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {TokenInterceptor} from "./core/interceptor";
+import { ListCartComponent } from './cart/list-cart/list-cart.component';
+import { AddCartComponent } from './cart/add-cart/add-cart.component';
+import { EditCartComponent } from './cart/edit-cart/edit-cart.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import {TokenInterceptor} from "./core/interceptor";
     ListUserComponent,
     LoginComponent,
     AddUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    ListCartComponent,
+    AddCartComponent,
+    EditCartComponent
   ],
   imports: [
     BrowserModule,

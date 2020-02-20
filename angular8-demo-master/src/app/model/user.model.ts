@@ -1,3 +1,5 @@
+import {Cart} from './cart.model';
+
 export class User {
 
   id: number;
@@ -6,4 +8,5 @@ export class User {
   email: string;
   phone: string;
   address: string;
+  cart: Cart;
 }

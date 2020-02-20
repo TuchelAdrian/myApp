@@ -1,5 +1,6 @@
 package com.ecenta.controller;
 
+import com.ecenta.data.CartData;
 import com.ecenta.data.UserData;
 import com.ecenta.entity.UserEntity;
 import com.ecenta.repository.UserRepository;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 //@PreAuthorize("hasAnyRole('USER')")
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -24,52 +27,69 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @GetMapping("/all")
     public String getAll() {
         ApiGetAllUsersResponse apiGetAllUsersResponse = new ApiGetAllUsersResponse();
-        List<UserData> userDataList=new ArrayList<>();
+        List<UserData> userDataList = new ArrayList<>();
         for (UserEntity user : userRepository.findAll()) {
-            UserData userData=new UserData(user.getId(), user.getName(), user.getPassword(), user.getPhone(), user.getEmail(), user.getAddress());
+            UserData userData;
+            if (Objects.nonNull(user.getCart())) {
+                CartData cartData = new CartData(user.getCart().getId(), user.getCart().getCount(), user.getCart().getTotalAmount());
+                userData = new UserData(user.getId(), user.getName(), user.getPassword(), user.getPhone(), user.getEmail(), user.getAddress(), cartData);
+            } else {
+                userData = new UserData(user.getId(), user.getName(), user.getPassword(), user.getPhone(), user.getEmail(), user.getAddress());
+            }
             userDataList.add(userData);
         }
         apiGetAllUsersResponse.setCode("200");
         apiGetAllUsersResponse.setUsers(userDataList);
         apiGetAllUsersResponse.setMessage("Ok");
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         return gson.toJson(apiGetAllUsersResponse);
     }
+
     @PutMapping("/update/{id}")
     public String update(@PathVariable int id, @RequestBody UserEntity user) {
         UserEntity userEntity = userRepository.findById(id).get();
         userEntity.setName(user.getName());
         userEntity.setPhone(user.getPhone());
         userEntity.setAddress(user.getAddress());
-        userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
+        userEntity.setEmail((user.getEmail()));
+        if (!userEntity.getPassword().equals(user.getPassword()))
+            userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(userEntity);
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         return gson.toJson(new SimpleResponse("200", "User update"));
     }
+
     @PatchMapping("/patch/{id}")
-    public void updateP(@PathVariable int id, @RequestParam("name") String name){UserEntity userEntity = userRepository.findById(id).get();userEntity.setName(name); userRepository.save((userEntity));}
+    public void updateP(@PathVariable int id, @RequestParam("name") String name) {
+        UserEntity userEntity = userRepository.findById(id).get();
+        userEntity.setName(name);
+        userRepository.save((userEntity));
+    }
+
     @PostMapping("/add")
-    public String create(@RequestBody CreateUserRequest createUserRequest){
+    public String create(@RequestBody CreateUserRequest createUserRequest) {
         UserEntity userEntity = new UserEntity(createUserRequest.getName(), createUserRequest.getPassword(),
                 createUserRequest.getEmail(), createUserRequest.getPhone(), createUserRequest.getAddress());
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         userRepository.save(userEntity);
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         return gson.toJson(new SimpleResponse("200", "User created"));
     }
+
     @DeleteMapping("/delete/{id}")
     public String deletePost(@PathVariable int id) {
         userRepository.deleteById(id);
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         return gson.toJson(new SimpleResponse("200", "User delete"));
     }
 
     @GetMapping("/{id}")
-    public String getUserById(@PathVariable int id){
-        UserEntity userEntity=userRepository.findById(id).get();
+    public String getUserById(@PathVariable int id) {
+        UserEntity userEntity = userRepository.findById(id).get();
         UserData createUserRequest = new UserData();
         createUserRequest.setId(userEntity.getId());
         createUserRequest.setName(userEntity.getName());

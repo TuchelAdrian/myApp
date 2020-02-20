@@ -15,15 +15,24 @@ public class UserData {
     private String email;
     @Expose
     private String address;
+    @Expose
+    private CartData cartData;
 
     public UserData(){};
-
     public UserData(int id, String name, String password, String phone, String email, String address) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+    }
+    public UserData(int id, String name, String password, String phone, String email, String address, CartData cartData) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.cartData=cartData;
     }
 
     public int getId() {
@@ -72,5 +81,13 @@ public class UserData {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public CartData getCartData() {
+        return cartData;
+    }
+
+    public void setCartData(CartData cartData) {
+        this.cartData = cartData;
     }
 }

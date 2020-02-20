@@ -9,6 +9,7 @@
       <th>Email</th>
       <th>Phone</th>
       <th>Address</th>
+      <th>Cart</th>
     </tr>
     </thead>
     <tbody>
@@ -18,8 +19,11 @@
       <td>{{user.email}}</td>
       <td>{{user.phone}}</td>
       <td>{{user.address}}</td>
-      <td><button class="btn btn-success" (click)="deleteUser(user)"> Delete</button>
-        <button class="btn btn-success" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button></td>
+      <td><label *ngIf="user.cart">{{user.cart.totalAmount}}</label></td>
+      <td>
+        <button class="btn btn-success" (click)="deleteUser(user)"> Delete</button>
+        <button class="btn btn-success" (click)="editUser(user)" style="margin-left: 20px;"> Edit</button>
+      </td>
     </tr>
     </tbody>
   </table>
